@@ -111,10 +111,10 @@ Nan treatment: as 0's, 1's, uniform random number
 
 
 Ananlysis:
-Confidance - standard deviation of 32 input samples
+Confidence - standard deviation of 32 input samples
 calculate r^2 and RMSE for results of each method
 feature importance - .coef_
-distributation of prediction errors
+distribution of prediction errors
 
 
 
