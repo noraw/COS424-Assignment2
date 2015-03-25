@@ -103,33 +103,32 @@ def generate_dat(chr, cutoff, nan_code):
     else:
       prev_distance = float(tokens[1]) - float(samples_lines[i-1].split()[1]) 
       next_distance = float(samples_lines[i+1].split()[1]) - float(tokens[1]) 
+    # this is a combination of 33 samples, 450k chip indicator
+    # and distances to previous neighbour and next neighbour
     samples_distances = samples+[float(tokens[37])]+[prev_distance]+[next_distance]
-    #print samples_distances
-    print i
     samples_distances_lines.append(samples_distances)
 
   for i in range(len(samples_distances_lines)):
     # check if the segment has nan in 450k chip
-    print 2, i
     if 'nan' not in truth_lines[i].split():
-      _sd = samples_distances_lines[i]
+      samples_distances = samples_distances_lines[i]
       if i == 0:
-        prev_sd = [float(0)]*sample_size
-        next_sd = samples_distances_lines[i+1]
+        prev_samples_distances = [float(0)]*sample_size
+        next_samples_distances = samples_distances_lines[i+1]
       elif i == len(samples_lines)-1:
-        prev_sd = samples_distances_lines[i-1]
-        next_sd = [float(0)]*sample_size
+        prev_samples_distances = samples_distances_lines[i-1]
+        next_samples_distances = [float(0)]*sample_size
       else:
-        prev_sd = samples_distances_lines[i-1]
-        next_sd = samples_distances_lines[i+1]
+        prev_samples_distances = samples_distances_lines[i-1]
+        next_samples_distances = samples_distances_lines[i+1]
 
-      combined_samples_distances = _sd[:sample_size] + prev_sd[:sample_size] + next_sd[:sample_size] + _sd[sample_size+1:]
-      #print _sd[:sample_size], len(_sd[:sample_size])
-      #print prev_sd[:sample_size], len(prev_sd[:sample_size])
-      #print next_sd[:sample_size], len(next_sd[:sample_size])
+      combined_samples_distances = samples_distances[:sample_size] + prev_samples_distances[:sample_size] + next_samples_distances[:sample_size] + samples_distances[sample_size+1:]
+      #print samples_distances[:sample_size], len(samples_distances[:sample_size])
+      #print prev_samples_distances[:sample_size], len(prev_samples_distances[:sample_size])
+      #print next_samples_distances[:sample_size], len(next_samples_distances[:sample_size])
       #print combined_samples_distances, len(combined_samples_distances)
 
-      if _sd[sample_size] == float(1):
+      if samples_distances[sample_size] == float(1):
         samples_train.append(combined_samples_distances)
       else:
         samples_test.append(combined_samples_distances)
@@ -140,14 +139,17 @@ def generate_dat(chr, cutoff, nan_code):
 
   print len(samples_train),"trains", len(samples_test), "tests"
 
-  matrix_train  = numpy.zeros(shape=(len(samples_train),sample_size), dtype=numpy.uint8)
+  matrix_width = 3*sample_size+2
+  matrix_train  = numpy.zeros(shape=(len(samples_train),matrix_width), dtype=numpy.uint8)
+  #print matrix_train.shape
   for i in range(len(samples_train)):
-    for j in range(sample_size):
+    for j in range(matrix_width):
       matrix_train[i,j] = samples_train[i][j]
 
-  matrix_test = numpy.zeros(shape=(len(samples_test),sample_size), dtype=numpy.uint8)
+  matrix_test = numpy.zeros(shape=(len(samples_test),matrix_width), dtype=numpy.uint8)
+  #print matrix_test.shape
   for i in range(len(samples_test)):
-    for j in range(sample_size):
+    for j in range(matrix_width):
       matrix_test[i,j] = samples_test[i][j]
   
   matrix_train.tofile("../data/X%s_chr%d_cutoff_%d_len_%d.dat" %(nan_code,chr_no,cutoff,len(samples_train)))
@@ -183,6 +185,6 @@ def generate_dat(chr, cutoff, nan_code):
 
 
 generate_dat(chr_no, cutoff, '0')
-#generate_dat(chr_no, cutoff, 'A')
-#generate_dat(chr_no, cutoff, 'R') 
+generate_dat(chr_no, cutoff, 'A')
+generate_dat(chr_no, cutoff, 'R') 
 
