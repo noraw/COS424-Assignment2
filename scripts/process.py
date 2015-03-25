@@ -182,8 +182,8 @@ def generate_dat(chr, cutoff, nan_code):
     for j in range(1):
       vector_test[i,j] = truth_test[i][j]
       
-  vector_train.tofile("../data/y%s_chr%d_cutoff_%d_len_%d.dat" %(nan_code,chr_no,cutoff,len(truth_train)))
-  vector_test.tofile("../data/y_test%s_chr%d_cutoff_%d_len_%d.dat" %(nan_code,chr_no,cutoff,len(truth_test)))
+  vector_train.tofile("../data/y_chr%d_cutoff_%d_len_%d.dat" %(chr_no,cutoff,len(truth_train)))
+  vector_test.tofile("../data/y_test_chr%d_cutoff_%d_len_%d.dat" %(chr_no,cutoff,len(truth_test)))
 
 
 generate_dat(chr_no, cutoff, '0')
