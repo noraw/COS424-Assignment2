@@ -140,13 +140,13 @@ def generate_dat(chr, cutoff, nan_code):
   print len(samples_train),"trains", len(samples_test), "tests"
 
   matrix_width = 3*sample_size+2
-  matrix_train  = numpy.zeros(shape=(len(samples_train),matrix_width), dtype=numpy.uint8)
+  matrix_train  = numpy.zeros(shape=(len(samples_train),matrix_width), dtype=numpy.float64)
   print matrix_train.shape
   for i in range(len(samples_train)):
     for j in range(matrix_width):
       matrix_train[i,j] = samples_train[i][j]
 
-  matrix_test = numpy.zeros(shape=(len(samples_test),matrix_width), dtype=numpy.uint8)
+  matrix_test = numpy.zeros(shape=(len(samples_test),matrix_width), dtype=numpy.float64)
   print matrix_test.shape
   for i in range(len(samples_test)):
     for j in range(matrix_width):
@@ -170,13 +170,13 @@ def generate_dat(chr, cutoff, nan_code):
 
   print len(truth_train),"trains", len(truth_test), "tests"
       
-  vector_train  = numpy.zeros(shape=(len(truth_train),1), dtype=numpy.uint8)
+  vector_train  = numpy.zeros(shape=(len(truth_train),1), dtype=numpy.float64)
   print vector_train.shape
   for i in range(len(truth_train)):
     for j in range(1):
       vector_train[i,j] = truth_train[i][j]
 
-  vector_test = numpy.zeros(shape=(len(truth_test),1), dtype=numpy.uint8)
+  vector_test = numpy.zeros(shape=(len(truth_test),1), dtype=numpy.float64)
   print vector_test.shape
   for i in range(len(truth_test)):
     for j in range(1):
