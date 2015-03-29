@@ -92,9 +92,10 @@ if args.LinearRegression:
     #LinearRegression(copy_X=True, fit_intercept=True, normalize=False)
 
 if args.Lasso:
-    print "Lasso"
-    outname = "lasso"
-    clf = linear_model.Lasso(alpha=.2)
+    alphaIn=5.0
+    print "Lasso: " + str(alphaIn)
+    outname = "lasso"+str(alphaIn)
+    clf = linear_model.Lasso(alpha=alphaIn)
 
 if args.RANSAC:
     print "RANSAC"
