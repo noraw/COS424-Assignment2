@@ -122,7 +122,7 @@ def generate_dat(chr, cutoff, nan_code):
         prev_samples_distances = samples_distances_lines[i-1]
         next_samples_distances = samples_distances_lines[i+1]
 
-      combined_samples_distances = samples_distances[:sample_size] + prev_samples_distances[:sample_size] + next_samples_distances[:sample_size] + samples_distances[sample_size+1:]
+      combined_samples_distances = samples_distances[:sample_size] + prev_samples_distances[:sample_size] + next_samples_distances[:sample_size] #+ samples_distances[sample_size+1:]
       #print samples_distances[:sample_size], len(samples_distances[:sample_size])
       #print prev_samples_distances[:sample_size], len(prev_samples_distances[:sample_size])
       #print next_samples_distances[:sample_size], len(next_samples_distances[:sample_size])
@@ -139,7 +139,7 @@ def generate_dat(chr, cutoff, nan_code):
 
   print len(samples_train),"trains", len(samples_test), "tests"
 
-  matrix_width = 3*sample_size+2
+  matrix_width = 3*sample_size#+2
   matrix_train  = numpy.zeros(shape=(len(samples_train),matrix_width), dtype=numpy.float64)
   print matrix_train.shape
   for i in range(len(samples_train)):
