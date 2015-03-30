@@ -1,4 +1,90 @@
+NOT INCLUDING DISTANCE FEATURES
 
+
+-bash-4.1$ python predictionMethods.py -S
+Namespace(Lasso=False, LinearRegression=False, RANSAC=True)
+X shape(7523, 99)
+X test shape (368411, 99)
+Y shape(7523, 1)
+Y test shape (368411, 1)
+RANSAC
+Nan = 0
+   predictions done.
+   R2:      0.518666631713
+   RSME:    0.117318725944
+   runtime: 1.2666759491
+Nan = Average
+   predictions done.
+   R2:      0.625812209834
+   RSME:    0.103440154156
+   runtime: 0.913011074066
+Nan = Random
+   predictions done.
+   R2:      0.535590034763
+   RSME:    0.115237842315
+   runtime: 0.892976045609
+
+
+
+-bash-4.1$ python predictionMethods.py -R
+Namespace(Lasso=False, LinearRegression=True, RANSAC=False)
+X shape(7523, 99)
+X test shape (368411, 99)
+Y shape(7523, 1)
+Y test shape (368411, 1)
+Linear Regression
+Nan = 0
+   predictions done.
+   R2:      0.843599811244
+   RSME:    0.0668748759446
+   runtime: 0.430975198746
+Nan = Average
+   predictions done.
+   R2:      0.876969010883
+   RSME:    0.0593132348956
+   runtime: 0.437019824982
+Nan = Random
+   predictions done.
+   R2:      0.874727197967
+   RSME:    0.059851184351
+   runtime: 0.49113702774
+
+
+bash-4.1$ python predictionMethods.py -L
+Namespace(Lasso=True, LinearRegression=False, RANSAC=False)
+X shape(7523, 99)
+X test shape (368411, 99)
+Y shape(7523, 1)
+Y test shape (368411, 1)
+Lasso: 5.0
+Nan = 0
+   predictions done.
+   R2:      -0.125441142131
+   RSME:    0.179393104915
+   runtime: 0.332124948502
+Nan = Average
+   predictions done.
+   R2:      -0.125441142131
+   RSME:    0.179393104915
+   runtime: 0.315057039261
+Nan = Random
+   predictions done.
+   R2:      -0.125441142131
+   RSME:    0.179393104915
+   runtime: 0.262263059616
+
+
+
+
+
+
+
+
+
+
+
+
+________________________________________________________________________
 -bash-4.1$ python predictionMethods.py -L
 Namespace(Lasso=True, LinearRegression=False, RANSAC=False)
 X shape(7523, 101)
